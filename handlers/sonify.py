@@ -24,9 +24,10 @@ def convert_to_midi(filename, parameter_x, parameter_y, size_param, sample_fract
 
     # Drop rows with missing values in key parameters
     df = df.dropna(subset=[parameter_x, parameter_y, size_param])
-    
+
+
+    # Enhanced the data so it is more sparsely spaced
     df[parameter_x] = -np.log(df[parameter_x] / df[parameter_x].max()) * 500
-    
     df[parameter_y] = (df[parameter_y] / df[parameter_y].max()) * 5000
 
     # Extract numpy arrays for convenience
@@ -34,7 +35,7 @@ def convert_to_midi(filename, parameter_x, parameter_y, size_param, sample_fract
     y_values = df[parameter_y].values # magnitude
     sizes = -df[size_param].values # bigger means bluer and hotter -> volume 
 
-    # If you want to visualize the data before converting to MIDI, uncomment:
+    # visualize the data before converting to MIDI:
     # visualize_data(x_values, y_values, sizes, parameter_x, parameter_y)
 
     # Convert the processed data into a MIDI file
@@ -58,7 +59,7 @@ def create_midi_file(x, y, sizes, filename="out.mid", duration_beats=120, bpm=60
     # Convert normalized y values into note indices (reverse mapping if desired)
     midi_notes = []
     for val in y_norm:
-        # If we want higher y -> lower note_index, reverse the mapping:
+        # higher y -> lower note_index, reverse the mapping:
         map_value(val, 0, 1, n_notes-1, 0)
         note_index = round(map_value(val, 0, 1, n_notes-1, 0))
         midi_notes.append(note_midis[note_index])
