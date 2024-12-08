@@ -5,10 +5,18 @@ This project stands at the intersection of art and science, where ancient human 
 
 ## Project Details
 
-- 90% stars discovered: The first
+### Parameters for Sonification
+- **Distance(Parsecs)**: maps note timing. Stars farther away are represented as later notes in the sequence
+- **Magnitude(Apparent Brightness)**: maps to pitch. Brighter stars mean higher pitches and dimmer stars mean lower pitch
+- **Color Index(Ci)**: map to velocity (volume). Lower value which means bluer/hotter stars maps to lower volume and vice versa
+
+### Data Visualization
+Because of the sheer scale of the datasets, we truncated the dataset for simplicity
+
+- **Raw Data** (90% stars discovered): Represents the completeness of the ATHYG Database in terms of known stars (approxiamtely 990 millions of stars)
 ![Alt Text](/plots/hyg_raw.png)
 
-- 0.3% stars sonified
+- **Sonified Data** (0.3% stars sonified): Represents the the subset of stars from the ATHYG database has been sampled for this project (about 3 million stars)
 ![Alt Text](/plots/hyg.png)
 
 
