@@ -1,7 +1,15 @@
 # Space2Sound
 
-90% stars discovered
-0.3% stars sonified
+## Inspiration
+This project stands at the intersection of art and science, where ancient human fascination with the cosmos meets cutting-edge technology to offer a sensory experience. By leveraging sonification, it helps redefine our relationship with space, making astronomy more than just a subject of visual observation. Historically, humans have always looked to the stars for inspiration, from the arts and beliefs in the religions of early ancient civilizations such as the Babylonians, Egyptians, and Greeks to the precision in the astronomical scale in science. This project echoes this timeless impulse of humans to space but reframes it in a more modern and technological setting, providing the public with an additional dimension of the universe.
+
+## Project Details
+
+- 90% stars discovered: The first
+![Alt Text](/plots/hyg_raw.png)
+
+- 0.3% stars sonified
+![Alt Text](/plots/hyg.png)
 
 
 ## Data Source

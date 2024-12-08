@@ -18,7 +18,6 @@ NOTE_NAMES = [
 
 
 def convert_to_midi(filename, parameter_x, parameter_y, size_param, sample_fraction=0.003):
-    # Load and sample data
     df = pd.read_csv(filename)
     df = df.sample(frac=sample_fraction)
 
@@ -30,15 +29,13 @@ def convert_to_midi(filename, parameter_x, parameter_y, size_param, sample_fract
     df[parameter_x] = -np.log(df[parameter_x] / df[parameter_x].max()) * 500
     df[parameter_y] = (df[parameter_y] / df[parameter_y].max()) * 5000
 
-    # Extract numpy arrays for convenience
     x_values = df[parameter_x].values # distance to the stars (parsecs)
     y_values = df[parameter_y].values # magnitude
     sizes = -df[size_param].values # bigger means bluer and hotter -> volume 
 
     # visualize the data before converting to MIDI:
-    # visualize_data(x_values, y_values, sizes, parameter_x, parameter_y)
+    visualize_data(x_values, y_values, sizes, parameter_x, parameter_y)
 
-    # Convert the processed data into a MIDI file
     create_midi_file(x_values, y_values, sizes, filename="out.mid")
 
 
@@ -47,16 +44,12 @@ def create_midi_file(x, y, sizes, filename="out.mid", duration_beats=120, bpm=60
     note_midis = [str2midi(n) for n in NOTE_NAMES]
     n_notes = len(note_midis)
 
-    # Normalize y to [0, 1] range to map to note indices
     y_norm = map_value(y, np.min(y), np.max(y), 0, 1)
-
-    # Map x from its range to a 0-duration_beats range (this sets the time of notes)
     x_mapped = map_value(x, 0, np.max(x), 0, duration_beats)
 
     # Map sizes to MIDI velocities (10 to 127)
     sizes_mapped = map_value(sizes, np.min(sizes), np.max(sizes), 10, 127).astype(int)
 
-    # Convert normalized y values into note indices (reverse mapping if desired)
     midi_notes = []
     for val in y_norm:
         # higher y -> lower note_index, reverse the mapping:
@@ -64,7 +57,6 @@ def create_midi_file(x, y, sizes, filename="out.mid", duration_beats=120, bpm=60
         note_index = round(map_value(val, 0, 1, n_notes-1, 0))
         midi_notes.append(note_midis[note_index])
     
-    # Create a single-track MIDI file
     my_midi_file = MIDIFile(numTracks=1)
     my_midi_file.addTempo(track=0, time=0, tempo=bpm)
 
@@ -90,10 +82,10 @@ def visualize_data(x, y, sizes, xlabel, ylabel):
     # Normalize sizes for plotting, if desired
     sizes_norm = (sizes - np.nanmin(sizes)) / (np.nanmax(sizes) - np.nanmin(sizes)) * 100 + 10
     plt.scatter(x, y, s=sizes_norm, alpha=0.7, edgecolors="k", linewidths=0.5)
-    plt.xlabel("Distance (parsecs)")
-    plt.ylabel("Magnitude (apprent brightness)")
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
     plt.grid(True)
-    plt.title("'Closer to Home' visualization")
+    plt.title("Data visualization")
     plt.show()
 
 
