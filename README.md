@@ -13,10 +13,10 @@ This project stands at the intersection of art and science, where ancient human 
 ### Data Visualization
 Because of the sheer scale of the datasets, we truncated the dataset for simplicity
 
-- **Raw Data** (90% stars discovered): Represents the completeness of the ATHYG Database in terms of known stars (approximately 990 million stars)
+- **Raw Data** (90% stars discovered): Represents the completeness of the ATHYG Database in terms of known stars (approximately 107,073 stars)
 ![Alt Text](/plots/hyg_raw.png)
 
-- **Sonified Data** (0.3% stars sonified): Represents the subset of stars from the ATHYG database that have been sampled for this project (about 3 million stars)
+- **Sonified Data** (0.3% stars sonified): Represents the subset of stars from the ATHYG database that have been sampled for this project (about 356 stars)
 ![Alt Text](/plots/hyg.png)
 
 
